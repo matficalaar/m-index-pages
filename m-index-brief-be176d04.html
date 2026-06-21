@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>熊猫体育 · 知识参考与查询站</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f9fafc;
+      color: #1e293b;
+      line-height: 1.7;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    /* 深色头图区 — 目录感明快 */
+    .hero-dark {
+      background: linear-gradient(115deg, #0f172a 0%, #1e293b 70%, #2d3a4f 100%);
+      color: #f1f5f9;
+      padding: 3rem 1.5rem 2.8rem;
+      text-align: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      border-bottom: 3px solid #f59e0b;
+    }
+    .hero-dark h1 {
+      font-size: 2.6rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 0.35rem;
+    }
+    .hero-dark .sub {
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      max-width: 700px;
+      margin: 0.4rem auto 1.2rem;
+      border-left: 4px solid #f59e0b;
+      padding-left: 1rem;
+      text-align: left;
+      display: inline-block;
+    }
+    .hero-tag {
+      display: inline-flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 0.8rem;
+    }
+    .hero-tag span {
+      background: rgba(255, 255, 255, 0.07);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      color: #e2e8f0;
+      border: 1px solid #475569;
+    }
+    /* 主体容器 — 浅色正文区，目录风格 */
+    .container {
+      max-width: 1100px;
+      margin: 2.2rem auto;
+      padding: 0 1.5rem 2.5rem;
+      flex: 1;
+    }
+    /* 卡片目录网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 1.6rem 1.5rem 1.8rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid #eef2f6;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #0f172a;
+      border-bottom: 2px solid #f59e0b;
+      display: inline-block;
+      padding-bottom: 0.2rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #334155;
+      margin: 0.8rem 0 0.2rem;
+    }
+    .card ul {
+      list-style: none;
+      margin-top: 0.3rem;
+    }
+    .card li {
+      padding: 0.3rem 0 0.3rem 0.8rem;
+      position: relative;
+      font-size: 0.9rem;
+      color: #1e293b;
+    }
+    .card li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: #f59e0b;
+    }
+    /* 说明区 + 提示区 */
+    .info-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      margin: 2rem 0 2.5rem;
+    }
+    .info-box {
+      background: white;
+      border-radius: 18px;
+      padding: 1.5rem 1.8rem;
+      flex: 1 1 260px;
+      border-left: 6px solid #f59e0b;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.02);
+    }
+    .info-box.alt {
+      border-left-color: #3b82f6;
+    }
+    .info-box h4 {
+      font-weight: 500;
+      color: #0f172a;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .info-box p, .info-box li {
+      font-size: 0.92rem;
+      color: #334155;
+    }
+    .info-box ul {
+      list-style: none;
+      margin-top: 0.3rem;
+    }
+    .info-box li {
+      padding: 0.25rem 0 0.25rem 1rem;
+      position: relative;
+    }
+    .info-box li::before {
+      content: "•";
+      color: #f59e0b;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    .info-box.alt li::before {
+      color: #3b82f6;
+    }
+    /* 询问摘要 / 对照式 */
+    .faq-mini {
+      background: white;
+      border-radius: 18px;
+      padding: 1.6rem 2rem;
+      margin: 2rem 0 2rem;
+      border: 1px solid #e6edf5;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .faq-mini h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .faq-mini details {
+      border-bottom: 1px solid #ecf1f7;
+      padding: 0.7rem 0;
+    }
+    .faq-mini details:last-of-type {
+      border-bottom: 0;
+    }
+    .faq-mini summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: #1e293b;
+      font-size: 0.95rem;
+      padding: 0.15rem 0;
+    }
+    .faq-mini summary::-webkit-details-marker {
+      color: #f59e0b;
+    }
+    .faq-mini .ans {
+      margin-top: 0.4rem;
+      font-size: 0.9rem;
+      color: #475569;
+      padding-left: 0.5rem;
+      border-left: 2px solid #f59e0b;
+      padding-left: 0.8rem;
+    }
+    /* 链接强调色 */
+    a {
+      color: #d97706;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border 0.15s, color 0.15s;
+    }
+    a:hover {
+      color: #b45309;
+      border-bottom: 1px solid #f59e0b;
+    }
+    /* 内嵌链接自然 */
+    .inline-link-sentence {
+      margin: 0.3rem 0;
+    }
+    .footer-note {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .footer-note span {
+      opacity: 0.7;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 600px) {
+      .hero-dark h1 { font-size: 2rem; }
+      .hero-dark .sub { font-size: 0.95rem; padding-left: 0.7rem; }
+      .container { padding: 0 1rem 2rem; }
+      .card-grid { gap: 1rem; }
+      .info-panel { flex-direction: column; }
+      .faq-mini { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头区 · 目录入口感 -->
+  <section class="hero-dark">
+    <h1>📘 熊猫体育·知识阅览</h1>
+    <div class="sub">信息对照 · 日常查询 · 延伸阅读</div>
+    <div class="hero-tag">
+      <span>⚡ 快捷参考</span>
+      <span>📂 分类卡片</span>
+      <span>🧭 常见对照</span>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- 卡片目录 — 四块不同内容 -->
+    <div class="card-grid">
+      <div class="card">
+        <h3>📌 基础信息</h3>
+        <p>日常查询中常涉及的基础内容、平台背景与常见表述，便于快速对照。</p>
+        <ul>
+          <li>关于平台定位与内容方向</li>
+          <li>版本更新与检索方式</li>
+          <li>常用术语与分类逻辑</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📖 功能场景</h3>
+        <p>从阅览、对照到延伸搜索，围绕实际使用场景提供简明说明。</p>
+        <ul>
+          <li>内容筛选与分类展示</li>
+          <li>信息导航与页面结构</li>
+          <li>多端适配与阅读习惯</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🧩 常见对照</h3>
+        <p>归纳用户经常对比或查询的几个侧面，形成简洁的参考轴。</p>
+        <ul>
+          <li>主题分类 vs 时间排序</li>
+          <li>列表视图 vs 摘要视图</li>
+          <li>移动端与桌面端差异</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📎 延伸阅读</h3>
+        <p>提供相关参考方向，帮助扩展信息边界，适合探索式阅览。</p>
+        <ul>
+          <li>同类平台内容组织方式</li>
+          <li>信息架构与标签体系</li>
+          <li>用户自定义阅读路径</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 说明区 + 提示区（两栏风格） -->
+    <div class="info-panel">
+      <div class="info-box">
+        <h4>📋 说明区 · 知识参考性质</h4>
+        <p>本页作为熊猫体育相关信息的辅助查阅页，内容基于公开信息与通用分类整理。不涉及内部数据或未授权资料，仅供个人对照与延伸了解。<br><br>如果您希望直接访问主站，可以使用以下句子中的链接：日常浏览时，许多人习惯将 <a href="https://m-index-pandasports.com">熊猫体育</a> 作为信息聚合的起点。</p>
+      </div>
+      <div class="info-box alt">
+        <h4>💡 提示区 · 使用建议</h4>
+        <ul>
+          <li>利用卡片目录快速定位感兴趣的部分</li>
+          <li>FAQ 摘要收纳了部分常见思路，可展开对照</li>
+          <li>链接采用强调色，便于在段落中识别</li>
+          <li>页面适合作为书签或临时参考入口</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 询问摘要 FAQ 风格 -->
+    <div class="faq-mini">
+      <h4>❓ 对照摘要 · 延伸阅读</h4>
+
+      <details>
+        <summary>信息检索时需要注意什么？</summary>
+        <div class="ans">建议先明确自己是想浏览分类内容，还是进行关键词对照。不同入口的展示逻辑略有差异，适当使用筛选有助于提升效率。<br>参考链接：<a href="https://m-index-pandasports.com">熊猫体育</a> 首页通常提供全局分类导航。</div>
+      </details>
+
+      <details>
+        <summary>日常查询可以用作什么场景？</summary>
+        <div class="ans">适合快速了解当前分类、对比不同栏目下的内容侧重，或者作为临时查阅某个表述的辅助页。本页的卡片与说明区即围绕这个目的组织。<br>例如通过 <a href="https://m-index-pandasports.com">熊猫体育</a> 可以快速回到信息总览层。</div>
+      </details>
+
+      <details>
+        <summary>延伸阅读的方向有哪些？</summary>
+        <div class="ans">可以关注内容分类方式、标签体系、信息层级以及不同视图下的阅读体验。这些并不涉及具体数据，而是作为知识库参考的侧面。<br>若需获取更多上下文，可直接访问 <a href="https://m-index-pandasports.com">熊猫体育</a> 浏览原始分类。</div>
+      </details>
+
+    </div>
+
+    <!-- 相关信息区 + 底部 -->
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; align-items: center; margin-top: 0.5rem;">
+      <div style="font-size: 0.9rem; color: #475569;">
+        <span style="font-weight: 500;">相关信息区</span> · 本页内容仅供知识对照，不构成官方说明。
+      </div>
+      <div style="font-size: 0.85rem; color: #64748b;">
+        📎 参考入口 · <a href="https://m-index-pandasports.com">熊猫体育</a>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="footer-note">
+      <span>内容方向：知识库入口式 · 目录/说明/提示/对照摘要</span>
+      <span>页面仅供个人参考使用</span>
+    </div>
+
+  </main>
+</body>
+</html>
